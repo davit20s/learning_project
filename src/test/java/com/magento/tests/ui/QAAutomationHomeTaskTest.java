@@ -32,21 +32,22 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
     public void buyingProcessInTheInternetShopTest() {
         UserModel user = UsersDP.getDefault();
         String TEST_DATA_TXT_FILE = "test_data.txt";
+        //
         /* ************************ [STEP 1] ****************************
          * Navigate to this site: https://magento.softwaretestingboard.com/
          *********************************************************************/
         browser
                 .configure(CHROME)
-                        .openBaseUrl();
+                .openBaseUrl();
         navigationSteps
                 .navigateToHomePage()
-        /* ***************************** [STEP 2] *******************************
-         * Use the menu in order to navigate into the bags section
-         ************************************************************************/
+                /* ***************************** [STEP 2] *******************************
+                 * Use the menu in order to navigate into the bags section
+                 ************************************************************************/
                 .navigateToBagsPage()
-        /* ***************************** [STEP 3] *******************************
-         * Add one of the bags to your cart
-         ************************************************************************/
+                /* ***************************** [STEP 3] *******************************
+                 * Add one of the bags to your cart
+                 ************************************************************************/
                 .addRandomBagToCart();
         /* ***************************** [STEP 4] *******************************
          * Proceed to checkout and capture the HTTP request that sends the following data to server
@@ -63,9 +64,9 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
         step2PaymentMethodSteps
                 .waitForPageToBeOpened()
                 .verifyShippingInformationRequest(shippingInformation, user)
-        /* ***************************** [STEP 6] *******************************
-         * Place the order
-         ************************************************************************/
+                /* ***************************** [STEP 6] *******************************
+                 * Place the order
+                 ************************************************************************/
                 .clickPlaceOrderButtonAndWaitForNextPage();
         /* ***************************** [STEP 7] *******************************
          * Collect the order ID and write it into a new file called test_data.txt
@@ -77,6 +78,7 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
          * Delete all possible created data
          *********************************************************************/
     }
+
 
     @TmsLink("0002") // https://test-url/0002
     @Tag(HIGH_PRIORITY_TAG)
@@ -92,9 +94,9 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
         String agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 16_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Mobile/15E148 Safari/604.1";
         browser
                 .configure(FIREFOX_CUSTOM_AGENT)
-        /* ************************ [STEP 2] ****************************
-         * Open the link https://www.whatismybrowser.com/detect/what-is-my-user-agent/ and verify that the user agent is correct
-         *********************************************************************/
+                /* ************************ [STEP 2] ****************************
+                 * Open the link https://www.whatismybrowser.com/detect/what-is-my-user-agent/ and verify that the user agent is correct
+                 *********************************************************************/
                 .open("https://www.whatismybrowser.com/detect/what-is-my-user-agent/");
         $x("//*[@id='detected_value']/a")
                 .as("Verify user agent is: " + agent)
@@ -122,5 +124,64 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
          *********************************************************************/
         browser
                 .open("chrome://settings/cookies");
+    }
+
+    @TmsLink("0004") // https://test-url/0001
+    @Tag(HIGH_PRIORITY_TAG)
+    @Test
+    @Description("buying process in the internet shop test–MEN")
+    public void buyingProcessInTheInternetShopTestMen() {
+        UserModel user = UsersDP.getDefault();
+        String TEST_DATA_TXT_FILE = "test_data.txt";
+        //
+        /* ************************ [STEP 1] ****************************
+         * Navigate to this site: https://magento.softwaretestingboard.com/
+         *********************************************************************/
+        browser
+                .configure(CHROME)
+                .openBaseUrl();
+        navigationSteps
+                .navigateToHomePage()
+                /* ***************************** [STEP 2] *******************************
+                 * Use the menu in order to navigate into the jackets section
+                 ************************************************************************/
+                .navigateToJackets()
+
+
+                /* ***************************** [STEP 3] *******************************
+                 * Add one of the bags to your cart
+                 ************************************************************************/
+
+                .addRandomJacketToCart();
+        /* ***************************** [STEP 4] *******************************
+         * Proceed to checkout and capture the HTTP request that sends the following data to server
+         ************************************************************************/
+        ShippingInformationRequest shippingInformation = headerBarSteps
+                .clickCartIconAndProceedToCheckout()
+                .waitForPageToBeOpened()
+                .verifyPageTitle()
+                .setPageData(user)
+                .clickNextButtonAndExtractPostData();
+
+
+        /* ***************************** [STEP 5] *******************************
+         * Validate that the above request contains the expected data.
+         ************************************************************************/
+        step2PaymentMethodSteps
+                .waitForPageToBeOpened()
+                .verifyShippingInformationRequest(shippingInformation, user)
+                /* ***************************** [STEP 6] *******************************
+                 * Place the order
+                 ************************************************************************/
+                .clickPlaceOrderButtonAndWaitForNextPage();
+        /* ***************************** [STEP 7] *******************************
+         * Collect the order ID and write it into a new file called test_data.txt
+         ************************************************************************/
+        String orderIdText = step3ThankYouSteps
+                .getOrderIdFromPage();
+        saveTextToFile(SAVED_FILES_FOLDER, TEST_DATA_TXT_FILE, orderIdText);
+        /* ************************ [POST CONDITIONS] ****************************
+         * Delete all possible created data
+         *********************************************************************/
     }
 }

@@ -43,7 +43,7 @@ public class Step1ShippingAddressSteps extends BaseStepsUi {
     @Step(Step1ShippingAddressPage.NAME + ": Verify page title")
     public Step1ShippingAddressSteps setPageData(UserModel user) {
         page.getEmailAddressInput().setTextWithClear(user.getEmail());
-        waitForElementToBeLoaded(page.getPasswordInput().getInputField(), Duration.ofSeconds(15));
+        // waitForElementToBeLoaded(page.getPasswordInput().getInputField(), Duration.ofSeconds(15));
         headerBarSteps.waitForLoadingIsCompleted();
         page.getFirstNameInput().setTextWithClear(user.getFirstName());
         page.getLastNameInput().setTextWithClear(user.getLastName());
@@ -78,5 +78,12 @@ public class Step1ShippingAddressSteps extends BaseStepsUi {
         // stop tracking
         ProxySteps.stopCapturingTraffic();
         return toObjectFromJson(ShippingInformationRequest.class, getRequestPostDataText(har));
+    }
+
+    @Step(Step1ShippingAddressPage.NAME + ": Click 'Next' button and extract post data")
+    public Step2PaymentMethodSteps clickNextButtonAndWaitForThePage() {
+        clickNextButton()
+                .waitForPageToBeOpened();
+        return step2PaymentMethodSteps;
     }
 }

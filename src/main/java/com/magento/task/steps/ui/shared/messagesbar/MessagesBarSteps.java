@@ -2,6 +2,7 @@ package com.magento.task.steps.ui.shared.messagesbar;
 
 import com.codeborne.selenide.Selenide;
 import com.magento.task.models.BagModel;
+import com.magento.task.models.JacketModel;
 import com.magento.task.objects.ui.pages.shared.messagesbar.MessagesBarPage;
 import com.magento.task.steps.ui.BaseStepsUi;
 import com.magento.task.steps.ui.shared.headerbar.HeaderBarSteps;
@@ -55,5 +56,14 @@ public class MessagesBarSteps extends BaseStepsUi {
                         .YOU_ADDED_TO_YOUR_SHOPPING_CART_MESSAGE.get(),
                             bagModel
                                     .getTitle()));
+    }
+
+    @Step(MessagesBarPage.NAME + ": Verify success message text")
+    public MessagesBarSteps verifySuccessMessageText(JacketModel jacketModel) {
+        return verifyMessageText(
+                String.format(page
+                                .YOU_ADDED_TO_YOUR_SHOPPING_CART_MESSAGE.get(),
+                        jacketModel
+                                .getTitle()));
     }
 }

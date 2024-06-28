@@ -4,7 +4,8 @@ import lombok.Getter;
 
 public enum PagePath {
     HOME(""),
-    BAGSPAGE("/gear/bags.html");
+    BAGSPAGE("/gear/bags.html"),
+    JACKETSPAGE("/men/tops-men/jackets-men.html");
 
     @Getter
     private final String key;

@@ -3,6 +3,7 @@ package com.magento.task.steps.ui.navigation;
 import com.magento.task.steps.ui.BaseStepsUi;
 import com.magento.task.steps.ui.bagspage.BagsSteps;
 import com.magento.task.steps.ui.homepage.HomeSteps;
+import com.magento.task.steps.ui.jacketspage.JacketsSteps;
 import io.qameta.allure.Step;
 
 import static com.magento.task.framework.utils.BrowserUtil.openPage;
@@ -20,6 +21,12 @@ public class NavigationSteps extends BaseStepsUi {
     public BagsSteps navigateToBagsPage() {
         openPage(BAGSPAGE);
         return bagsSteps.waitForPageToBeOpened();
+    }
+
+    @Step("Navigate to Login page")
+    public JacketsSteps navigateToJacketsPage(){
+        openPage(JACKETSPAGE);
+        return jacketsSteps.waitForPageToBeOpened();
     }
 
 }

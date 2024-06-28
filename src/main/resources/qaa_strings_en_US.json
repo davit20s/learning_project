@@ -1,9 +1,16 @@
 {
   "com.magento.task.objects.ui.pages.homepage.HomePage": {
-    "GEAR_MENU_BAGS_MENU_ITEM": "Bags"
+    "GEAR_MENU_BAGS_MENU_ITEM": "Bags",
+    "MEN_MENU_TOPS_MENU_ITEM": "Tops",
+    "MEN_MENU_TOPS_MENU_JACKETS_MENU_ITEM": "Jackets",
+    "MEN_MENU_BOTTOMS_MENU_ITEM": "Bottoms",
+    "MEN_MENU_BOTTOMS_MENU_PANTS_MENU_ITEM": "Pants"
   },
   "com.magento.task.objects.ui.pages.bagspage.BagsPage": {
     "TITLE_TEXT": "Bags"
+  },
+  "com.magento.task.objects.ui.pages.jacketspage.JacketsPage": {
+    "TITLE_TEXT": "Jackets"
   },
   "com.magento.task.objects.ui.pages.shared.messagesbar.MessagesBarPage": {
     "YOU_ADDED_TO_YOUR_SHOPPING_CART_MESSAGE": "You added %s to your shopping cart.",

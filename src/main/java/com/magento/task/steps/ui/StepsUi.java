@@ -5,6 +5,7 @@ import com.magento.task.steps.ui.checkout.Step1ShippingAddressSteps;
 import com.magento.task.steps.ui.checkout.Step2PaymentMethodSteps;
 import com.magento.task.steps.ui.checkout.Step3ThankYouSteps;
 import com.magento.task.steps.ui.homepage.HomeSteps;
+import com.magento.task.steps.ui.jacketspage.JacketsSteps;
 import com.magento.task.steps.ui.shared.headerbar.HeaderBarSteps;
 import com.magento.task.steps.ui.shared.messagesbar.MessagesBarSteps;
 import com.magento.task.steps.ui.navigation.NavigationSteps;
@@ -12,6 +13,7 @@ import com.magento.task.steps.ui.navigation.NavigationSteps;
 public interface StepsUi {
     HomeSteps homeSteps = new HomeSteps();
     BagsSteps bagsSteps = new BagsSteps();
+    JacketsSteps jacketsSteps = new JacketsSteps();
     NavigationSteps navigationSteps = new NavigationSteps();
     MessagesBarSteps messagesBarSteps = new MessagesBarSteps();
     HeaderBarSteps headerBarSteps = new HeaderBarSteps();

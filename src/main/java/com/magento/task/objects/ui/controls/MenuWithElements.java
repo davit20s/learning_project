@@ -8,8 +8,10 @@ import lombok.Data;
 import lombok.NonNull;
 import com.magento.task.framework.utils.FluentWaitUtil;
 import com.magento.task.objects.ui.pages.homepage.items.MenuItemEnum;
+import org.openqa.selenium.By;
 
 import java.time.Duration;
+import java.util.LinkedList;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.$$x;
@@ -88,4 +90,34 @@ public class MenuWithElements {
     public boolean isDisplayed() {
         return getMenuButton().isDisplayed();
     }
+
+    public void selectNestedMenuItem(String parentMenuItemText, String nestedMenuItemText) {
+        waitForElementToBeLoaded(getMenuButton(), Duration.ofSeconds(10));
+        getMenuButton().shouldBe(interactable).hover();
+        waitMenuItemIsLoaded(parentMenuItemText);
+        getMenuItem(parentMenuItemText).shouldBe(interactable).hover();
+        waitMenuItemIsLoaded(nestedMenuItemText);
+        getMenuItem(nestedMenuItemText).click();
+    }
+
+//    public void selectNestedMenuItem(LinkedList<String> locMeNames) {
+//        waitForElementToBeLoaded(getMenuButton(), Duration.ofSeconds(10));
+//        getMenuButton().shouldBe(interactable).hover();
+//
+//        for (int i = 0; i < locMeNames.size() - 1; i++) {
+//            waitForElementWithTextToBeLoaded(locMeNames.get(i), Duration.ofSeconds(10));
+//            getMenuItem(locMeNames.get(i)).shouldBe(interactable).hover();
+//        }
+//
+//        waitForElementWithTextToBeLoaded(locMeNames.getLast(), Duration.ofSeconds(10));
+//        getMenuItem(locMeNames.getLast()).click();
+//    }
+
+//    private void waitForElementWithTextToBeLoaded(String elementName, Duration timeout) {
+//        Selenide.Wait()
+//                .withMessage("Wait element with text to be loaded ...")
+//                .withTimeout(timeout)
+//                .pollingEvery(Duration.ofSeconds(1))
+//                .until(d -> d.findElement(By.name(elementName)).isDisplayed());
+//    }
 }
