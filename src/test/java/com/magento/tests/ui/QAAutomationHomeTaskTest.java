@@ -22,7 +22,7 @@ import static com.magento.task.framework.utils.FilesUtils.saveTextToFile;
         url = "https://<feature link>"),
         @Link(name = "Manual test cases for: Demonstrate buying process in the Internet shop feature",
                 url = "https://<mgmt tool url>")})
-public class QAAutomationHomeTaskTest extends BaseTestUi {
+public class QAAutomationHomeTaskTest extends BaseProxyTestUi {
     ConfigurationBrowser browser = new ConfigurationBrowser();
 
     @TmsLink("0001") // https://test-url/0001
@@ -32,7 +32,6 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
     public void buyingProcessInTheInternetShopTest() {
         UserModel user = UsersDP.getDefault();
         String TEST_DATA_TXT_FILE = "test_data.txt";
-        //
         /* ************************ [STEP 1] ****************************
          * Navigate to this site: https://magento.softwaretestingboard.com/
          *********************************************************************/
@@ -67,7 +66,8 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
                 /* ***************************** [STEP 6] *******************************
                  * Place the order
                  ************************************************************************/
-                .clickPlaceOrderButtonAndWaitForNextPage();
+                .clickPlaceOrderButtonAndWaitForNextPageWithThreeReTries()
+                .verifyPageTitle();
         /* ***************************** [STEP 7] *******************************
          * Collect the order ID and write it into a new file called test_data.txt
          ************************************************************************/
@@ -129,7 +129,7 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
     @TmsLink("0004") // https://test-url/0001
     @Tag(HIGH_PRIORITY_TAG)
     @Test
-    @Description("buying process in the internet shop test–MEN")
+    @Description("buying process in the internet shop test-MEN")
     public void buyingProcessInTheInternetShopTestMen() {
         UserModel user = UsersDP.getDefault();
         String TEST_DATA_TXT_FILE = "test_data.txt";
@@ -146,12 +146,9 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
                  * Use the menu in order to navigate into the jackets section
                  ************************************************************************/
                 .navigateToJackets()
-
-
                 /* ***************************** [STEP 3] *******************************
                  * Add one of the bags to your cart
                  ************************************************************************/
-
                 .addRandomJacketToCart();
         /* ***************************** [STEP 4] *******************************
          * Proceed to checkout and capture the HTTP request that sends the following data to server
@@ -162,8 +159,6 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
                 .verifyPageTitle()
                 .setPageData(user)
                 .clickNextButtonAndExtractPostData();
-
-
         /* ***************************** [STEP 5] *******************************
          * Validate that the above request contains the expected data.
          ************************************************************************/
@@ -173,7 +168,8 @@ public class QAAutomationHomeTaskTest extends BaseTestUi {
                 /* ***************************** [STEP 6] *******************************
                  * Place the order
                  ************************************************************************/
-                .clickPlaceOrderButtonAndWaitForNextPage();
+                .clickPlaceOrderButtonAndWaitForNextPageWithThreeReTries()
+                .verifyPageTitle();
         /* ***************************** [STEP 7] *******************************
          * Collect the order ID and write it into a new file called test_data.txt
          ************************************************************************/

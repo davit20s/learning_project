@@ -47,22 +47,24 @@ public class Step2PaymentMethodSteps extends BaseStepsUi {
         return step3ThankYouSteps;
     }
 
-    @Step(Step2PaymentMethodPage.NAME + ": Click 'Place Order' button")
-    public Step3ThankYouSteps clickPlaceOrderButtonAndWaitForNextPage() {
-        try { // this page doesn't work as expected. This likely be addressed in normal dev process
-            tryClickPlaceOrderButton();
-        } catch (AssertionError e) {
-            try {
-                reTryClickPlaceOrderButton();
-            } catch (AssertionError e1) {
-                reTryClickPlaceOrderButton();
+    @Step(Step2PaymentMethodPage.NAME + ": Click 'Place Order' button with three re-tries")
+    public Step3ThankYouSteps clickPlaceOrderButtonAndWaitForNextPageWithThreeReTries() {
+        int reTries = 3;
+        while (reTries-->0) {
+            try { // this page doesn't work as expected. This likely be addressed in normal dev process
+                tryClickPlaceOrderButtonAndWaitForPageToBeOpened();
+            } catch (AssertionError e) {
+                try {
+                    reTryClickPlaceOrderButton();
+                } catch (AssertionError ignored) {
+                }
             }
         }
         return step3ThankYouSteps;
     }
 
-    private void tryClickPlaceOrderButton() {
-        clickPlaceOrderButton()
+    private Step3ThankYouSteps tryClickPlaceOrderButtonAndWaitForPageToBeOpened() {
+        return clickPlaceOrderButton()
                 .waitForPageToBeOpened()
                 .verifyPageTitle();
     }
@@ -72,7 +74,7 @@ public class Step2PaymentMethodSteps extends BaseStepsUi {
         waitForPageToBeLoadedJS();
         waitForPageToBeOpened();
         Selenide.sleep(3*1000);
-        tryClickPlaceOrderButton();
+        tryClickPlaceOrderButtonAndWaitForPageToBeOpened();
     }
 
     @Step(Step2PaymentMethodPage.NAME + ": Click 'Place Order' button")
