@@ -5,9 +5,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class JacketModel {
-
-    private final String NOT_AVAILABLE = "<not available>";
+public class JacketModel extends ItemModel {
 
     private String title;
     private Double rating;
